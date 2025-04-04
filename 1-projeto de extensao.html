@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback de Atendimento</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .btn {
+            font-size: 24px;
+            padding: 15px 30px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .btn-like {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .btn-dislike {
+            background-color: #F44336;
+            color: white;
+        }
+        .message {
+            display: none;
+            margin-top: 20px;
+            font-size: 20px;
+            color: #333;
+        }
+        .counter {
+            margin-top: 30px;
+            font-size: 20px;
+            color: #333;
+        }
+        .suggestion-box {
+            margin-top: 30px;
+        }
+        textarea {
+            width: 80%;
+            height: 100px;
+            font-size: 16px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .btn-submit {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #008CBA;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Como foi seu atendimento hoje?</h1>
+    
+    <div class="buttons">
+        <button class="btn btn-like" onclick="sendFeedback('like')">👍 Gostei</button>
+        <button class="btn btn-dislike" onclick="sendFeedback('dislike')">👎 Não gostei</button>
+    </div>
+    
+    <p id="thankYouMessage" class="message">Obrigado pelo seu feedback!</p>
+
+    <div class="counter">
+        <p>👍 Gostei: <span id="likeCount">0</span></p>
+        <p>👎 Não gostei: <span id="dislikeCount">0</span></p>
+    </div>
+
+    <div class="suggestion-box">
+        <h2>Deixe sua sugestão</h2>
+        <textarea id="suggestionText" placeholder="Digite sua sugestão aqui..."></textarea>
+        <br>
+        <button class="btn-submit" onclick="submitSuggestion()">Enviar</button>
+    </div>
+
+    <script>
+        let likeCount = 0;
+        let dislikeCount = 0;
+
+        function sendFeedback(type) {
+            document.getElementById('thankYouMessage').style.display = 'block';
+
+            if (type === 'like') {
+                likeCount++;
+                document.getElementById('likeCount').textContent = likeCount;
+            } else {
+                dislikeCount++;
+                document.getElementById('dislikeCount').textContent = dislikeCount;
+            }
+
+            setTimeout(() => {
+                document.getElementById('thankYouMessage').style.display = 'none';
+            }, 2000);
+        }
+
+        function submitSuggestion() {
+            let suggestion = document.getElementById('suggestionText').value;
+            if (suggestion.trim() === "") {
+                alert("Por favor, escreva uma sugestão antes de enviar.");
+                return;
+            }
+            
+            alert("Sugestão enviada com sucesso! Obrigado pelo seu feedback.");
+            document.getElementById('suggestionText').value = ""; // Limpa o campo
+        }
+    </script>
+</body>
+</html>
